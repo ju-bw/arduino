@@ -6,9 +6,8 @@
 
 ~~~ 
   git log --oneline  # less beenden mit <Shift+q>
-  git log --graph
-  git log --graph --decorate --pretty=oneline --abbrev-commit 
-  git log --graph --decorate --pretty=format:"%ad; %h; %s" --no-merges --date=short > log.txt
+  git log --graph --oneline 
+  git log --graph --pretty=format:";  %cn;  %h;  %ad;  %s" --date=relative > log.txt
 ~~~
 
 ## branch erstellen - wechseln - löschen
