@@ -85,7 +85,8 @@ $inhalt = "$content/inhalt.tex" # Inhalt book.tex & print.tex
 ### info
 $info = "Auswahlmenue"
 # Menue
-$auswahl =  @'
+$auswahl = @'
+  (0) schnell PDF erstellen
   (1) artikel.pdf
   (2) book.pdf
   (3) print.pdf
@@ -102,7 +103,7 @@ $auswahl =  @'
 '@
 
 # Menueeintraege
-$auswahl_von = 1
+$auswahl_von = 0
 $auswahl_bis = 13
 
 ### Fragen
@@ -161,6 +162,25 @@ function texAufraeumen{
   if(test-path ./*.blg){rm *.blg -force -recurse}
   if(test-path ./*.run*){rm *.run* -force -recurse}
   if(test-path ./*.toc){rm *.toc -force -recurse}
+  if(test-path ./*.fls){rm *.fls -force -recurse}
+  if(test-path ./*.fdb*){rm *.fdb* -force -recurse}
+}
+
+# pdf-latexmk
+# "*main.tex"
+### Funktionsaufruf: texlatexmk "*main.tex"
+function texlatexmk{
+  param( 
+    [string]$filter
+  ) 
+  #$filter = "*main.tex"
+  [array]$array = ls ./ $filter -Force 
+  for ($x=0; $x -lt $array.length; $x++){#-lt=kleiner
+    $name = "$($array[$x])"              # file.tex
+    $basename = "$($array.BaseName[$x])" # file
+    # pdflatex "main.tex"
+    latexmk -pdf $name
+  } 
 }
 
 # pdflatex
@@ -297,7 +317,18 @@ while($nochmal){
       # Eingabefehler: keine Zahl
       $ErrorEingabe2
       [int]$varAuswahl = 0 # initialisieren, sonst Fehler
-  }          
+  }  
+  
+  # schnell pdf erstellen
+  if($varAuswahl -eq 0){ # gleich 
+    # 
+    ### Funktionsaufruf: 
+    texArtikel
+
+    # pdflatex
+    ### Funktionsaufruf: 
+    texlatexmk "*main.tex" 
+  } 
 
   # artikel.pdf
   if($varAuswahl -eq 1){ # gleich 
@@ -480,9 +511,10 @@ while($nochmal){
       git commit -a # vim Texteingabe: <i> / beenden mit <ESC : wq>
       git pull
       git push
+      trennLinie 33 *
       #git log --oneline  # less beenden mit <Shift+q>
-      git log --graph --decorate --pretty=oneline --abbrev-commit 
-      git log --graph --decorate --pretty=format:"%ad; %h; %s" --no-merges --date=short > log.txt
+      git log --graph --oneline 
+      git log --graph --pretty=format:";  %cn;  %h;  %ad;  %s" --date=relative > log.txt 
     }
   }
   

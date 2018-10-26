@@ -47,11 +47,11 @@ Git: <https://git-scm.com/downloads>
 Imagemagick: <https://www.imagemagick.org/script/download.php#windows>
 
 
-## Repository notizenDummy-v02 von Github downloaden
+## Repository arduino von Github downloaden
 
 ~~~
   # Shell: Kopie downloaden
-  $ git clone https://github.com/ju-bw/notizenDummy-v02.git .
+  $ git clone https://github.com/ju-bw/arduino.git .
 ~~~
 
 ## neues Repository auf github anlegen
@@ -59,13 +59,13 @@ Imagemagick: <https://www.imagemagick.org/script/download.php#windows>
 ~~~
   # https://github.com/new
   # github: Create a new repository
-  # Repository name = notizenDummy-v02
+  # Repository name = arduino
   # Shell: Git Befehle
   # ".gitconfig", ".gitignore" konfigurieren und erstellen
   git init
   git add .
   git commit -am "Projekt start"
-  git remote add origin https://github.com/ju-bw/notizenDummy-v02.git
+  git remote add origin https://github.com/ju-bw/arduino.git
   git push -u origin master 
   git status
   git pull
@@ -87,12 +87,38 @@ Beachte das *min. zwei Markdowndateien* vorhanden sein müssen.
   # Editor - Powershellscript "docKonverter-v02.ps1" anpassen
     ### Projekt
     # anpassen
-    $thema = "notizenDummy-v02" # Thema
+    $thema = "arduino" # Thema
     $bildformat = "svg"    # Bildformate: svg, jpg, png
     $codeformat = "sh"     # Codeformate: c, cpp, sh, py, ps1
     $language = "Powershell"   # Latex-Code:  C, [LaTeX]TeX, Bash, Python, Powershell
-  # Shell: Script ausfuehren
+~~~
+
+**PowerShell: Script ausfuehren**
+
+~~~
   $ ./docKonverter-v02.ps1
+  ju -- https://bw1.eu -- 26-Okt-18
+
+  Auswahlmenue
+  ============
+
+    (0) schnell PDF erstellen
+    (1) artikel.pdf
+    (2) book.pdf
+    (3) print.pdf
+    (4) alle Abbildungen.tex
+    (5) alle Quellcodedateien.tex
+    (6) backup - "../$archiv/$timestampArchiv-$thema.zip"
+    (7) git - Repository auf github notwendig!
+    (8) imgWeb.ps1 # ext. Script - Bilder optimieren (Latex/Web)
+    (9) html
+    (10) pandoc & suchen/ersetzen - Achtung: min. zwei Markdown Dateien notwendig !!!
+    (11) Projekt reset
+    (12) Projekt neu
+    (13) Beenden
+
+  *********************************
+  Eingabe - [Zahl]:
 ~~~
 
 ## Bilder optimieren
